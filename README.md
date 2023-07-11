@@ -1,5 +1,9 @@
 # Simple Lesson Cython
 
+### Полезные ссылки
+
+- https://www.peterbaumgartner.com/blog/intro-to-just-enough-cython-to-be-useful/
+
 #### версия python
 
 ```bash
@@ -139,6 +143,8 @@ Print function is really slow!
 ### 1.3 Simple python loop with sum
 
 ```python
+import time
+
 def big_loop_sum():
     amount = 10**8 * 5
     start = time.time()
@@ -151,6 +157,9 @@ def big_loop_sum():
     total = now - start
 
     print(f"Total Sum = {total_sum} Total loop time = {total}")
+
+if __name__ == "__main__":
+    big_loop_sum()
 ```
 
 ```bash
@@ -215,3 +224,225 @@ Total Sum = 124999999750000000 Total loop time = 0.12099981307983398
 ```
 
 Код сложения стал примерно в ~13.623712062835693/0.12099981307983398 = **112.59 раз быстрее**
+
+## 2. Simple integration
+
+- [определение интеграла](https://brilliant.org/wiki/definite-integrals/)
+- [оригинальный туториал пандас](https://pandas.pydata.org/docs/user_guide/enhancingperf.html)
+
+### 2.1 Python pandas integration
+
+```python
+import pandas as pd
+import numpy as np
+import time
+
+
+def f(x):
+    return x * (x - 1)
+
+
+def integrate_f(a, b, N):
+    s = 0
+    dx = (b - a) / N
+    for i in range(N):
+        s += f(a + i * dx)
+    result = s * dx
+    return result
+
+
+def simple_integration():
+    amount = 10**4 * 2
+    df = pd.DataFrame(
+        {
+            "a": -1 * np.abs(np.random.randn(amount)),
+            "b": np.abs(np.random.randn(amount)),
+            "N": np.random.randint(100, amount, (amount)),
+            "x": np.float64,
+        }
+    )
+    print(df.head(5))
+    start = time.time()
+    df["x"] = df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)
+    total_time = time.time() - start
+    print(df.head(5))
+
+    print(f"Total integration time = {total_time}")
+
+
+if __name__ == "__main__":
+    simple_integration()
+```
+
+```bash
+python .\python_pandas.py
+```
+
+```console
+         a         b      N                        x
+0 -0.895617  0.116314  17235  <class 'numpy.float64'>
+1 -1.146209  1.313681  12825  <class 'numpy.float64'>
+2 -1.501192  1.131736   3999  <class 'numpy.float64'>
+3 -1.123872  0.785894  19235  <class 'numpy.float64'>
+4 -0.800014  0.222322  16083  <class 'numpy.float64'>
+          a         b      N         x
+0 -0.895617  0.116314  17235  0.634344
+1 -1.146209  1.313681  12825  1.051875
+2 -1.501192  1.131736   3999  2.098433
+3 -1.123872  0.785894  19235  0.957836
+4 -0.800014  0.222322  16083  0.469687
+Total integration time = 22.239185571670532
+```
+
+### 2.2 Cython simple copy paste
+
+```python
+def f_plain(x):
+    return x * (x - 1)
+
+def integrate_f_plain(a, b, N):
+    s = 0
+    dx = (b - a) / N
+    for i in range(N):
+        s += f_plain(a + i * dx)
+    return s * dx
+```
+
+```python
+from distutils.core import setup
+from Cython.Build import cythonize
+
+setup(name="cython_pandas", ext_modules=cythonize("./cython_pandas.pyx"))
+```
+
+```bash
+python .\cython_pandas_setup.py build_ext --inplace --plat-name win-amd64
+```
+
+```python
+import pandas as pd
+import numpy as np
+import time
+from cython_pandas import integrate_f_plain
+
+
+def simple_integration():
+    amount = 10**4 * 2
+    df = pd.DataFrame(
+        {
+            "a": -1 * np.abs(np.random.randn(amount)),
+            "b": np.abs(np.random.randn(amount)),
+            "N": np.random.randint(100, amount, (amount)),
+            "x": np.float64,
+        }
+    )
+    print(df.head(5))
+    start = time.time()
+    df["x"] = df.apply(lambda x: integrate_f_plain(x["a"], x["b"], x["N"]), axis=1)
+    total_time = time.time() - start
+    print(df.head(5))
+
+    print(f"Total integration time = {total_time}")
+
+
+if __name__ == "__main__":
+    simple_integration()
+
+```
+
+```bash
+python .\cython_pandas_wrapper.py
+```
+
+```console
+          a         b      N                        x
+0 -0.351611  0.798271   8040  <class 'numpy.float64'>
+1 -0.278288  1.861562   6194  <class 'numpy.float64'>
+2 -0.155229  0.043896   5357  <class 'numpy.float64'>
+3 -0.015697  0.648400   7157  <class 'numpy.float64'>
+4 -0.728737  0.307716  18081  <class 'numpy.float64'>
+          a         b      N         x
+0 -0.351611  0.798271   8040 -0.072705
+1 -0.278288  1.861562   6194  0.463344
+2 -0.155229  0.043896   5357  0.012364
+3 -0.015697  0.648400   7157 -0.119208
+4 -0.728737  0.307716  18081  0.356940
+Total integration time = 12.960063934326172
+```
+
+Мы просто скомпилировали код, а уже получили прирост почти в 2х раза!
+
+### 2.3 Cython add datatypes
+
+```python
+cdef double f_typed(double x) except? -2:
+    return x * (x - 1)
+
+cpdef double integrate_f_typed(double a, double b, int N):
+    cdef int i
+    cdef double s, dx
+    s = 0
+    dx = (b - a) / N
+    for i in range(N):
+        s += f_typed(a + i * dx)
+    return s * dx
+```
+
+```bash
+python .\cython_pandas_setup.py build_ext --inplace --plat-name win-amd64
+```
+
+```python
+import pandas as pd
+import numpy as np
+import time
+from cython_pandas import integrate_f_plain, integrate_f_typed
+
+
+def simple_integration_typed():
+    amount = 10**4 * 2
+    df = pd.DataFrame(
+        {
+            "a": -1 * np.abs(np.random.randn(amount)),
+            "b": np.abs(np.random.randn(amount)),
+            "N": np.random.randint(100, amount, (amount)),
+            "x": np.float64,
+        }
+    )
+    print(df.head(5))
+    start = time.time()
+    df["x"] = df.apply(lambda x: integrate_f_typed(x["a"], x["b"], x["N"]), axis=1)
+    total_time = time.time() - start
+    print(df.head(5))
+
+    print(f"Total integration time = {total_time}")
+
+
+if __name__ == "__main__":
+    simple_integration_typed()
+
+```
+
+```bash
+python .\cython_pandas_wrapper.py
+```
+
+```console
+          a         b      N                        x
+0 -0.827819  0.130310  17336  <class 'numpy.float64'>
+1 -0.223284  0.437670  12644  <class 'numpy.float64'>
+2 -0.686149  0.260230  16746  <class 'numpy.float64'>
+3 -1.703770  1.133487   9982  <class 'numpy.float64'>
+4 -2.181895  0.943481  19789  <class 'numpy.float64'>
+          a         b      N         x
+0 -0.827819  0.130310  17336  0.524032
+1 -0.223284  0.437670  12644 -0.039179
+2 -0.686149  0.260230  16746  0.315133
+3 -1.703770  1.133487   9982  2.943673
+4 -2.181895  0.943481  19789  5.678181
+Total integration time = 0.2722744941711426
+```
+
+По итогу у нас получилось ускорить изначальную функцию в 22.239185571670532 / 0.2722744941711426 = **в 81.6792833988 раз!**
+
+И это еще далеко не предел.
