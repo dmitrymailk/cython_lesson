@@ -1,13 +1,30 @@
-from spacy_cython import main_nlp_fast
-import urllib.request
+from spacy_cython import cython_sentence_tok, cython_pos_tag
 import spacy
+import time
+from datasets import load_dataset
+
+
+def simple_sentence_tokenization():
+    dataset = load_dataset("alturing/gutenberg-texts")
+    dataset = dataset["train"]
+    text = dataset[0]["text"]
+    start = time.time()
+    sentences = cython_sentence_tok(text)
+    print(time.time() - start)
+    # 21.640190839767456
+
+
+def simple_pos_tag():
+    dataset = load_dataset("alturing/gutenberg-texts")
+    dataset = dataset["train"]
+    text = dataset[0]["text"]
+    start = time.time()
+    pos_tags = cython_pos_tag(text)
+    print(time.time() - start)
+    # print(pos_tags)
+    # 21.785778999328613
 
 
 if __name__ == "__main__":
-    with urllib.request.urlopen(
-        "https://raw.githubusercontent.com/pytorch/examples/master/word_language_model/data/wikitext-2/valid.txt"
-    ) as response:
-        text = response.read()
-    nlp = spacy.load("en_core_web_sm")
-    doc_list = list(nlp(text[:80000].decode("utf8")) for i in range(10))
-    main_nlp_fast(doc_list)
+    # simple_sentence_tokenization()
+    simple_pos_tag()

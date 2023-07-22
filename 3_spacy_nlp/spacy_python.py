@@ -1,26 +1,40 @@
-import urllib.request
 import spacy
+from datasets import load_dataset
+import time
 
 
-def slow_loop(doc_list, word, tag):
-    n_out = 0
-    for doc in doc_list:
-        for tok in doc:
-            if tok.lower_ == word and tok.tag_ == tag:
-                n_out += 1
-    return n_out
+def simple_sentence_tokenization():
+    dataset = load_dataset("alturing/gutenberg-texts")
+    dataset = dataset["train"]
+    text = dataset[0]["text"]
+    start = time.time()
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    sentences = [sent for sent in doc.sents]
+    print(time.time() - start)
+    # 21.70147180557251
 
 
-def main_nlp_slow(doc_list):
-    n_out = slow_loop(doc_list, "run", "NN")
-    print(n_out)
+def simple_pos_tag():
+    dataset = load_dataset("alturing/gutenberg-texts")
+    dataset = dataset["train"]
+    text = dataset[0]["text"]
+    start = time.time()
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    pos_tags = []
+    for token in doc:
+        pos_tags.append(
+            {
+                "token": token.text,
+                "pos_tag": token.tag_,
+            }
+        )
+    print(time.time() - start)
+    # print(pos_tags)
+    # 21.87799096107483
 
 
 if __name__ == "__main__":
-    # Build a dataset of 10 parsed document extracted from the Wikitext-2 dataset
-    with urllib.request.urlopen(
-        "https://raw.githubusercontent.com/pytorch/examples/master/word_language_model/data/wikitext-2/valid.txt"
-    ) as response:
-        text = response.read()
-    nlp = spacy.load("en")
-    doc_list = list(nlp(text[:800000].decode("utf8")) for i in range(10))
+    # simple_sentence_tokenization()
+    simple_pos_tag()
