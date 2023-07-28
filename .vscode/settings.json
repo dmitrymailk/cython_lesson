@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.hbs": "handlebars",
+		"*.html": "html",
+		"string": "cpp",
+		"functional": "cpp"
+	}
+}

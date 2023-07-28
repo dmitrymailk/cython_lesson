@@ -14,6 +14,9 @@ $ ./run
 #include <math.h>
 #include <string.h>
 #include <fcntl.h>
+
+#include "llama_c.h"
+
 #if defined _WIN32
 #include "win.h"
 #else
@@ -500,37 +503,20 @@ int argmax(float *v, int n)
 }
 // ----------------------------------------------------------------------------
 
-int main(int argc, char *argv[])
+char *basic_generation_1(char *checkpoint)
 {
 
     // poor man's C argparse
-    char *checkpoint = NULL;  // e.g. out/model.bin
+    // char *checkpoint = NULL;  // e.g. out/model.bin
     float temperature = 0.9f; // e.g. 1.0, or 0.0
     int steps = 256;          // max number of steps to run for, 0: use seq_len
     char *prompt = NULL;      // prompt string
 
     // 'checkpoint' is necessary arg
-    if (argc < 2)
+    if (!checkpoint)
     {
-        printf("Usage: %s <checkpoint_file> [temperature] [steps] [prompt]\n", argv[0]);
+        printf("You should provide some checkpoint\n");
         return 1;
-    }
-    if (argc >= 2)
-    {
-        checkpoint = argv[1];
-    }
-    if (argc >= 3)
-    {
-        // optional temperature. 0.0 = (deterministic) argmax sampling. 1.0 = baseline
-        temperature = atof(argv[2]);
-    }
-    if (argc >= 4)
-    {
-        steps = atoi(argv[3]);
-    }
-    if (argc >= 5)
-    {
-        prompt = argv[4];
     }
 
     // seed rng with time. if you want deterministic behavior use temperature 0.0
@@ -711,6 +697,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-class LLama2Cpp {
-    
+void generate_1(char *checkpoint)
+{
+    basic_generation_1(checkpoint);
 }
