@@ -856,7 +856,6 @@ char *basic_generation_2(char *checkpoint)
 
         // following BOS token (1), sentencepiece decoder strips any leading whitespace (see PR #89)
         char *token_str = (token == 1 && vocab[next][0] == ' ') ? vocab[next] + 1 : vocab[next];
-        // printf("pos = %d\n", pos);
         generation_result[pos] = token_str;
         // printf("%s", token_str);
         // fflush(stdout);
@@ -875,7 +874,6 @@ char *basic_generation_2(char *checkpoint)
     long end = time_in_ms();
     // printf("\nachieved tok/s: %f\n", (steps - 1) / (double)(end - start) * 1000);
 
-    // printf("generation_resultn \n");
     char *result = malloc(sizeof(char) * 3000);
     for (int i = 0; i < steps; i++)
     {
