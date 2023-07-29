@@ -8,10 +8,6 @@
 
 #### версия python
 
-```bash
-python -m venv env
-```
-
 ```console
 Python 3.9.0
 ```
@@ -20,12 +16,6 @@ Python 3.9.0
 
 ```bash
 python -m venv env
-```
-
-#### активировать среду (win 10)
-
-```bash
-.\env\Scripts\activate
 ```
 
 #### установить все нужные пакеты
@@ -98,7 +88,7 @@ from Cython.Build import cythonize
 setup(name="loop_cpython", ext_modules=cythonize("./loop_cpython.pyx"))
 ```
 
-Чтобы собрать данный код необходимо выпонить следующую команду. Она должна скомпилировать нам бинарник и модуль на python, который мы сможем импртировать в обычном скрипте, при этом сам код будет быстрый как си.
+Выполняем следующую команду, она должна скомпилировать нам бинарник и модуль на python, который мы сможем импртировать в обычном скрипте, при этом сам код будет быстрый как си.
 
 ```bash
 python setup.py build_ext --inplace
@@ -424,7 +414,7 @@ Total integration time = 12.960063934326172
 
 Мы просто скопировали и скомпилировали код, а уже получили **прирост в 2х раза**!
 
-Заставляем задуматься. Но давайте пойдем дальше и ускорим наш код еще сильнее.
+Заставляет задуматься. Но давайте пойдем дальше и ускорим наш код еще сильнее.
 
 ### 2.3 Добавляем в Cython типы данных
 
@@ -456,7 +446,7 @@ cpdef double integrate_f_typed(double a, double b, int N):
 python setup.py build_ext --inplace
 ```
 
-Код сборки почти не поменялся, только теперь все функции оказались типизированы.
+Код сборки не поменялся, только теперь все функции оказались типизированы.
 
 ```python
 # 2_pandas_integration/cython_pandas_wrapper.py
@@ -530,7 +520,6 @@ Total integration time = 0.2722744941711426
 Разберем честно украденный пример из официальной документации.
 
 - https://cython.readthedocs.io/en/latest/src/userguide/wrapping_CPlusPlus.html
--
 
 В данном примере мы напишем класс прямоугольника на си, а затем воспользуемся некоторыми методами на python.
 
@@ -543,19 +532,19 @@ Total integration time = 0.2722744941711426
 
 namespace shapes
 {
-	class Rectangle
-	{
-	public:
-		int x0, y0, x1, y1;
+    class Rectangle
+    {
+    public:
+        int x0, y0, x1, y1;
         // nullable constructor
-		Rectangle();
+        Rectangle();
         // basic constructor
-		Rectangle(int x0, int y0, int x1, int y1);
-		// dummy deconstructor
+        Rectangle(int x0, int y0, int x1, int y1);
+        // dummy deconstructor
         ~Rectangle();
-		void move(int dx, int dy);
-		void print();
-	};
+        void move(int dx, int dy);
+        void print();
+    };
 }
 
 #endif
@@ -570,39 +559,39 @@ namespace shapes
 namespace shapes
 {
 
-	// Default constructor
-	Rectangle::Rectangle() {}
+    // Default constructor
+    Rectangle::Rectangle() {}
 
-	// Overloaded constructor
-	Rectangle::Rectangle(int x0, int y0, int x1, int y1)
-	{
-		this->x0 = x0;
-		this->y0 = y0;
-		this->x1 = x1;
-		this->y1 = y1;
-	}
+    // Overloaded constructor
+    Rectangle::Rectangle(int x0, int y0, int x1, int y1)
+    {
+        this->x0 = x0;
+        this->y0 = y0;
+        this->x1 = x1;
+        this->y1 = y1;
+    }
 
-	// Destructor
-	Rectangle::~Rectangle()
-	{
-		printf("Object deconstruction....\n");
-	}
+    // Destructor
+    Rectangle::~Rectangle()
+    {
+        printf("Object deconstruction....\n");
+    }
 
-	// Move the rectangle by dx dy
-	void Rectangle::move(int dx, int dy)
-	{
-		printf("Moving...\n");
-		this->x0 += dx;
-		this->y0 += dy;
-		this->x1 += dx;
-		this->y1 += dy;
-	}
+    // Move the rectangle by dx dy
+    void Rectangle::move(int dx, int dy)
+    {
+        printf("Moving...\n");
+        this->x0 += dx;
+        this->y0 += dy;
+        this->x1 += dx;
+        this->y1 += dy;
+    }
 
     // функция печати, добавил для наглядности, что мы можем что-то печатать из си кода
-	void Rectangle::print()
-	{
-		printf("x0=%d y0=%d x1=%d y1=%d\n", this->x0, this->y0, this->x1, this->y1);
-	}
+    void Rectangle::print()
+    {
+        printf("x0=%d y0=%d x1=%d y1=%d\n", this->x0, this->y0, this->x1, this->y1);
+    }
 }
 ```
 
@@ -610,17 +599,20 @@ namespace shapes
 
 ```python
 # 3_import_c++/rectangle_cpy.pyx
-# distutils: language = c++ <---- данная строчка должна быть в начале файла, только так компилятор поймет что ему нужно работать с с++ кодом
+# distutils: language = c++ <---- данная строчка должна быть в начале файла, 
+# только так компилятор поймет что ему нужно работать с с++ кодом
 
 # данная строчка говорит компилятору cython чтобы он нашел данный файл
-# и скомпилировал его. Это нужно чтобы мы потом могли вызвать необходимую нам функцию, описанную в данном файле.
+# и скомпилировал его. Это нужно чтобы мы потом могли вызвать 
+# необходимую нам функцию, описанную в данном файле.
 cdef extern from "Rectangle.cpp":
     pass
 
 
 # объявляем еще раз класс, только на cython
-# это необходимо чтобы он потом смог найти и сопоставить нужные нам поля.
-# согласен некоторый бойлерплейт получается, но кажется это довольно небольшая цена
+# это необходимо чтобы он потом смог найти и сопоставить 
+# нужные нам поля. согласен некоторый бойлерплейт получается, 
+# но кажется это довольно небольшая цена
 cdef extern from "Rectangle.h" namespace "shapes":
     cdef cppclass Rectangle:
         int x0, y0, x1, y1
@@ -629,8 +621,8 @@ cdef extern from "Rectangle.h" namespace "shapes":
         void move(int, int)
         void print()
 
-# До этого мы работали исключительно с классами на с++, чтобы python нас вообще понял
-# нужно создать еще одну обертку(да, как-то многовато уже)
+# До этого мы работали исключительно с классами на с++, чтобы 
+# python нас вообще понял нужно создать еще одну обертку(да, как-то многовато уже)
 # данная обертка, к примеру, может вынести только нужные нам поля и функции
 cdef class PyRectangle:
     cdef Rectangle *c_rect
@@ -794,16 +786,16 @@ void generate_1(char *checkpoint)
 # 4_import_llama/llama_cy.pyx
 
 cdef extern from "llama_c.h":
-	void generate_1(char* checkpoint)
+    void generate_1(char* checkpoint)
 
 def llama_generate_1(checkpoint: str = 'model.bin'):
-	# передаем из обычного питона строку
+    # передаем из обычного питона строку
     # затем кодируем ее в байты
-	c_name = checkpoint.encode('utf-8')
+    c_name = checkpoint.encode('utf-8')
     # создаем переменную ссылочного типа
-	cdef char* c_checkpoint = c_name
+    cdef char* c_checkpoint = c_name
     # и наконец вызываем нужную функцию генерации
-	generate_1(c_checkpoint)
+    generate_1(c_checkpoint)
 ```
 
 Собираем...
@@ -1085,16 +1077,16 @@ char* generate_2(char *checkpoint);
 ```python
 # 4_import_llama/llama_cy.pyx
 cdef extern from "llama_c.h":
-	void generate_1(char* checkpoint)
-	char* generate_2(char* checkpoint)
+    void generate_1(char* checkpoint)
+    char* generate_2(char* checkpoint)
 
 def llama_generate_2(checkpoint: str = 'model.bin'):
-	# pass checkpoint name to our c code and get result
-	c_name = checkpoint.encode('utf-8')
-	cdef char* c_checkpoint = c_name
-	cdef char* generation_result = generate_2(c_checkpoint)
-	result = generation_result.decode('unicode_escape')
-	print(result)
+    # pass checkpoint name to our c code and get result
+    c_name = checkpoint.encode('utf-8')
+    cdef char* c_checkpoint = c_name
+    cdef char* generation_result = generate_2(c_checkpoint)
+    result = generation_result.decode('unicode_escape')
+    print(result)
 ```
 
 Собираем ...
