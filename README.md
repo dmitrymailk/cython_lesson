@@ -24,6 +24,21 @@ python -m venv env
 pip install -r requirements.txt
 ```
 
+## Оглавление 
+
+1. Сравнение циклов на python и cython
+    - 1.1 Простой цикл на python с print
+    - 1.2 Простой цикл на cython с print
+    - 1.3 Нахождение большой суммы на python
+    - 1.4 Нахождение большой суммы на cython
+2. Простое интегрирование
+    - 2.1 Интегрирование на pandas при помощи python
+    - 2.2 Компиляция python кода в cython без каких либо изменений
+    - 2.3 Добавляем в Cython типы данных
+3. Использования кода на Си в Python
+4. Запуск llama2.c от karpathy на cython.
+      
+
 ## 1. Сравнение циклов на python и cython
 
 ### 1.1 Простой цикл на python с print
