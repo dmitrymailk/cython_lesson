@@ -1087,8 +1087,6 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__llama_cy
 #define __PYX_HAVE_API__llama_cy
 /* Early includes */
-#include <string.h>
-#include <stdlib.h>
 #include "llama_c.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1890,10 +1888,6 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* #### Code section: module_declarations ### */
 
-/* Module declarations from "libc.string" */
-
-/* Module declarations from "libc.stdlib" */
-
 /* Module declarations from "llama_cy" */
 /* #### Code section: typeinfo ### */
 /* #### Code section: before_global_var ### */
@@ -1905,7 +1899,7 @@ int __pyx_module_is_main_llama_cy = 0;
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_print;
 /* #### Code section: string_decls ### */
-static const char __pyx_k__9[] = "?";
+static const char __pyx_k__7[] = "?";
 static const char __pyx_k_str[] = "str";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
@@ -1923,14 +1917,12 @@ static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_llama_cy_pyx[] = "llama_cy.pyx";
 static const char __pyx_k_llama_generate_1[] = "llama_generate_1";
 static const char __pyx_k_llama_generate_2[] = "llama_generate_2";
-static const char __pyx_k_llama_generate_3[] = "llama_generate_3";
 static const char __pyx_k_generation_result[] = "generation_result";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_8llama_cy_llama_generate_1(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_8llama_cy_llama_generate_1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_checkpoint); /* proto */
 static PyObject *__pyx_pf_8llama_cy_2llama_generate_2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_checkpoint); /* proto */
-static PyObject *__pyx_pf_8llama_cy_4llama_generate_3(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_checkpoint); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyString_Type_encode = {0, 0, 0, 0, 0};
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -1961,11 +1953,7 @@ typedef struct {
   #endif
   #if CYTHON_USE_MODULE_STATE
   #endif
-  #if CYTHON_USE_MODULE_STATE
-  #endif
-  #if CYTHON_USE_MODULE_STATE
-  #endif
-  PyObject *__pyx_n_s__9;
+  PyObject *__pyx_n_s__7;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_c_checkpoint;
   PyObject *__pyx_n_s_c_name;
@@ -1978,7 +1966,6 @@ typedef struct {
   PyObject *__pyx_kp_s_llama_cy_pyx;
   PyObject *__pyx_n_s_llama_generate_1;
   PyObject *__pyx_n_s_llama_generate_2;
-  PyObject *__pyx_n_s_llama_generate_3;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_kp_s_model_bin;
   PyObject *__pyx_n_s_name;
@@ -1989,12 +1976,10 @@ typedef struct {
   PyObject *__pyx_kp_s_utf_8;
   PyObject *__pyx_tuple_;
   PyObject *__pyx_tuple__3;
-  PyObject *__pyx_tuple__5;
+  PyObject *__pyx_tuple__4;
   PyObject *__pyx_tuple__6;
-  PyObject *__pyx_tuple__8;
   PyObject *__pyx_codeobj__2;
-  PyObject *__pyx_codeobj__4;
-  PyObject *__pyx_codeobj__7;
+  PyObject *__pyx_codeobj__5;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2037,7 +2022,7 @@ static int __pyx_m_clear(PyObject *m) {
   #ifdef __Pyx_FusedFunction_USED
   Py_CLEAR(clear_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_CLEAR(clear_module_state->__pyx_n_s__9);
+  Py_CLEAR(clear_module_state->__pyx_n_s__7);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_c_checkpoint);
   Py_CLEAR(clear_module_state->__pyx_n_s_c_name);
@@ -2050,7 +2035,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_llama_cy_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_llama_generate_1);
   Py_CLEAR(clear_module_state->__pyx_n_s_llama_generate_2);
-  Py_CLEAR(clear_module_state->__pyx_n_s_llama_generate_3);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_kp_s_model_bin);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
@@ -2061,12 +2045,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_utf_8);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
-  Py_CLEAR(clear_module_state->__pyx_tuple__5);
+  Py_CLEAR(clear_module_state->__pyx_tuple__4);
   Py_CLEAR(clear_module_state->__pyx_tuple__6);
-  Py_CLEAR(clear_module_state->__pyx_tuple__8);
   Py_CLEAR(clear_module_state->__pyx_codeobj__2);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__4);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__7);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__5);
   return 0;
 }
 #endif
@@ -2087,7 +2069,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #ifdef __Pyx_FusedFunction_USED
   Py_VISIT(traverse_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_VISIT(traverse_module_state->__pyx_n_s__9);
+  Py_VISIT(traverse_module_state->__pyx_n_s__7);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_c_checkpoint);
   Py_VISIT(traverse_module_state->__pyx_n_s_c_name);
@@ -2100,7 +2082,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_llama_cy_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_llama_generate_1);
   Py_VISIT(traverse_module_state->__pyx_n_s_llama_generate_2);
-  Py_VISIT(traverse_module_state->__pyx_n_s_llama_generate_3);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_kp_s_model_bin);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
@@ -2111,12 +2092,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_utf_8);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
-  Py_VISIT(traverse_module_state->__pyx_tuple__5);
+  Py_VISIT(traverse_module_state->__pyx_tuple__4);
   Py_VISIT(traverse_module_state->__pyx_tuple__6);
-  Py_VISIT(traverse_module_state->__pyx_tuple__8);
   Py_VISIT(traverse_module_state->__pyx_codeobj__2);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__4);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__7);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__5);
   return 0;
 }
 #endif
@@ -2147,11 +2126,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #if CYTHON_USE_MODULE_STATE
 #endif
-#if CYTHON_USE_MODULE_STATE
-#endif
-#if CYTHON_USE_MODULE_STATE
-#endif
-#define __pyx_n_s__9 __pyx_mstate_global->__pyx_n_s__9
+#define __pyx_n_s__7 __pyx_mstate_global->__pyx_n_s__7
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_c_checkpoint __pyx_mstate_global->__pyx_n_s_c_checkpoint
 #define __pyx_n_s_c_name __pyx_mstate_global->__pyx_n_s_c_name
@@ -2164,7 +2139,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_llama_cy_pyx __pyx_mstate_global->__pyx_kp_s_llama_cy_pyx
 #define __pyx_n_s_llama_generate_1 __pyx_mstate_global->__pyx_n_s_llama_generate_1
 #define __pyx_n_s_llama_generate_2 __pyx_mstate_global->__pyx_n_s_llama_generate_2
-#define __pyx_n_s_llama_generate_3 __pyx_mstate_global->__pyx_n_s_llama_generate_3
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_kp_s_model_bin __pyx_mstate_global->__pyx_kp_s_model_bin
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
@@ -2175,81 +2149,172 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_utf_8 __pyx_mstate_global->__pyx_kp_s_utf_8
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
-#define __pyx_tuple__5 __pyx_mstate_global->__pyx_tuple__5
+#define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
 #define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
-#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
 #define __pyx_codeobj__2 __pyx_mstate_global->__pyx_codeobj__2
-#define __pyx_codeobj__4 __pyx_mstate_global->__pyx_codeobj__4
-#define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
+#define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
 /* #### Code section: module_code ### */
 
-/* "llama_cy.pyx":8
- * 	char* generate_2(char* checkpoint)
+/* "llama_cy.pyx":6
  * 
- * def llama_generate_1():             # <<<<<<<<<<<<<<
- * 	# https://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html
- * 	# simple call from python
+ * 
+ * def llama_generate_1(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * 	# pass checkpoint name to our c code
+ * 	c_name = checkpoint.encode('utf-8')
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8llama_cy_1llama_generate_1(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_8llama_cy_1llama_generate_1 = {"llama_generate_1", (PyCFunction)__pyx_pw_8llama_cy_1llama_generate_1, METH_NOARGS, 0};
-static PyObject *__pyx_pw_8llama_cy_1llama_generate_1(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+static PyObject *__pyx_pw_8llama_cy_1llama_generate_1(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_8llama_cy_1llama_generate_1 = {"llama_generate_1", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8llama_cy_1llama_generate_1, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8llama_cy_1llama_generate_1(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_checkpoint = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED const Py_ssize_t __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("llama_generate_1 (wrapper)", 0);
-  __pyx_r = __pyx_pf_8llama_cy_llama_generate_1(__pyx_self);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_checkpoint,0};
+    PyObject* values[1] = {0};
+    values[0] = ((PyObject*)((PyObject*)__pyx_kp_s_model_bin));
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_checkpoint);
+          if (value) { values[0] = value; kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "llama_generate_1") < 0)) __PYX_ERR(0, 6, __pyx_L3_error)
+      }
+    } else {
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_checkpoint = ((PyObject*)values[0]);
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("llama_generate_1", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 6, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("llama_cy.llama_generate_1", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_checkpoint), (&PyString_Type), 0, "checkpoint", 1))) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_r = __pyx_pf_8llama_cy_llama_generate_1(__pyx_self, __pyx_v_checkpoint);
 
   /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8llama_cy_llama_generate_1(CYTHON_UNUSED PyObject *__pyx_self) {
-  char *__pyx_v_checkpoint;
+static PyObject *__pyx_pf_8llama_cy_llama_generate_1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_checkpoint) {
+  PyObject *__pyx_v_c_name = NULL;
+  char *__pyx_v_c_checkpoint;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  char *__pyx_t_2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("llama_generate_1", 0);
 
-  /* "llama_cy.pyx":11
- * 	# https://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html
- * 	# simple call from python
- * 	cdef char* checkpoint = 'stories15M.bin'             # <<<<<<<<<<<<<<
- * 	generate_1(checkpoint)
+  /* "llama_cy.pyx":8
+ * def llama_generate_1(checkpoint: str = 'model.bin'):
+ * 	# pass checkpoint name to our c code
+ * 	c_name = checkpoint.encode('utf-8')             # <<<<<<<<<<<<<<
+ * 	cdef char* c_checkpoint = c_name
+ * 	generate_1(c_checkpoint)
+ */
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_encode, __pyx_v_checkpoint, __pyx_kp_s_utf_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_c_name = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "llama_cy.pyx":9
+ * 	# pass checkpoint name to our c code
+ * 	c_name = checkpoint.encode('utf-8')
+ * 	cdef char* c_checkpoint = c_name             # <<<<<<<<<<<<<<
+ * 	generate_1(c_checkpoint)
  * 
  */
-  __pyx_v_checkpoint = ((char *)"stories15M.bin");
+  __pyx_t_2 = __Pyx_PyObject_AsWritableString(__pyx_v_c_name); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_v_c_checkpoint = __pyx_t_2;
 
-  /* "llama_cy.pyx":12
- * 	# simple call from python
- * 	cdef char* checkpoint = 'stories15M.bin'
- * 	generate_1(checkpoint)             # <<<<<<<<<<<<<<
+  /* "llama_cy.pyx":10
+ * 	c_name = checkpoint.encode('utf-8')
+ * 	cdef char* c_checkpoint = c_name
+ * 	generate_1(c_checkpoint)             # <<<<<<<<<<<<<<
  * 
  * def llama_generate_2(checkpoint: str = 'model.bin'):
  */
-  generate_1(__pyx_v_checkpoint);
+  generate_1(__pyx_v_c_checkpoint);
 
-  /* "llama_cy.pyx":8
- * 	char* generate_2(char* checkpoint)
+  /* "llama_cy.pyx":6
  * 
- * def llama_generate_1():             # <<<<<<<<<<<<<<
- * 	# https://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html
- * 	# simple call from python
+ * 
+ * def llama_generate_1(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * 	# pass checkpoint name to our c code
+ * 	c_name = checkpoint.encode('utf-8')
  */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("llama_cy.llama_generate_1", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_c_name);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "llama_cy.pyx":14
- * 	generate_1(checkpoint)
+/* "llama_cy.pyx":12
+ * 	generate_1(c_checkpoint)
  * 
  * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
- * 	# pass checkpoint name to our c code
+ * 	# pass checkpoint name to our c code and get result
  * 	c_name = checkpoint.encode('utf-8')
  */
 
@@ -2298,12 +2363,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_checkpoint);
           if (value) { values[0] = value; kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 12, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "llama_generate_2") < 0)) __PYX_ERR(0, 14, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "llama_generate_2") < 0)) __PYX_ERR(0, 12, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -2317,13 +2382,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("llama_generate_2", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 14, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("llama_generate_2", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 12, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("llama_cy.llama_generate_2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_checkpoint), (&PyString_Type), 0, "checkpoint", 1))) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_checkpoint), (&PyString_Type), 0, "checkpoint", 1))) __PYX_ERR(0, 12, __pyx_L1_error)
   __pyx_r = __pyx_pf_8llama_cy_2llama_generate_2(__pyx_self, __pyx_v_checkpoint);
 
   /* function exit code */
@@ -2338,161 +2403,6 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 static PyObject *__pyx_pf_8llama_cy_2llama_generate_2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_checkpoint) {
   PyObject *__pyx_v_c_name = NULL;
   char *__pyx_v_c_checkpoint;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  char *__pyx_t_2;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("llama_generate_2", 0);
-
-  /* "llama_cy.pyx":16
- * def llama_generate_2(checkpoint: str = 'model.bin'):
- * 	# pass checkpoint name to our c code
- * 	c_name = checkpoint.encode('utf-8')             # <<<<<<<<<<<<<<
- * 	cdef char* c_checkpoint = c_name
- * 	generate_1(c_checkpoint)
- */
-  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_encode, __pyx_v_checkpoint, __pyx_kp_s_utf_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_c_name = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "llama_cy.pyx":17
- * 	# pass checkpoint name to our c code
- * 	c_name = checkpoint.encode('utf-8')
- * 	cdef char* c_checkpoint = c_name             # <<<<<<<<<<<<<<
- * 	generate_1(c_checkpoint)
- * 
- */
-  __pyx_t_2 = __Pyx_PyObject_AsWritableString(__pyx_v_c_name); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 17, __pyx_L1_error)
-  __pyx_v_c_checkpoint = __pyx_t_2;
-
-  /* "llama_cy.pyx":18
- * 	c_name = checkpoint.encode('utf-8')
- * 	cdef char* c_checkpoint = c_name
- * 	generate_1(c_checkpoint)             # <<<<<<<<<<<<<<
- * 
- * def llama_generate_3(checkpoint: str = 'model.bin'):
- */
-  generate_1(__pyx_v_c_checkpoint);
-
-  /* "llama_cy.pyx":14
- * 	generate_1(checkpoint)
- * 
- * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
- * 	# pass checkpoint name to our c code
- * 	c_name = checkpoint.encode('utf-8')
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("llama_cy.llama_generate_2", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_c_name);
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "llama_cy.pyx":20
- * 	generate_1(c_checkpoint)
- * 
- * def llama_generate_3(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
- * 	# pass checkpoint name to our c code and get result
- * 	c_name = checkpoint.encode('utf-8')
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8llama_cy_5llama_generate_3(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-static PyMethodDef __pyx_mdef_8llama_cy_5llama_generate_3 = {"llama_generate_3", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8llama_cy_5llama_generate_3, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8llama_cy_5llama_generate_3(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  PyObject *__pyx_v_checkpoint = 0;
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED const Py_ssize_t __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("llama_generate_3 (wrapper)", 0);
-  {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_checkpoint,0};
-    PyObject* values[1] = {0};
-    values[0] = ((PyObject*)((PyObject*)__pyx_kp_s_model_bin));
-    if (__pyx_kwds) {
-      Py_ssize_t kw_args;
-      switch (__pyx_nargs) {
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
-      switch (__pyx_nargs) {
-        case  0:
-        if (kw_args > 0) {
-          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_checkpoint);
-          if (value) { values[0] = value; kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "llama_generate_3") < 0)) __PYX_ERR(0, 20, __pyx_L3_error)
-      }
-    } else {
-      switch (__pyx_nargs) {
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-    }
-    __pyx_v_checkpoint = ((PyObject*)values[0]);
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("llama_generate_3", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 20, __pyx_L3_error)
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("llama_cy.llama_generate_3", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_checkpoint), (&PyString_Type), 0, "checkpoint", 1))) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8llama_cy_4llama_generate_3(__pyx_self, __pyx_v_checkpoint);
-
-  /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8llama_cy_4llama_generate_3(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_checkpoint) {
-  PyObject *__pyx_v_c_name = NULL;
-  char *__pyx_v_c_checkpoint;
   char *__pyx_v_generation_result;
   PyObject *__pyx_v_result = NULL;
   PyObject *__pyx_r = NULL;
@@ -2502,31 +2412,31 @@ static PyObject *__pyx_pf_8llama_cy_4llama_generate_3(CYTHON_UNUSED PyObject *__
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("llama_generate_3", 0);
+  __Pyx_RefNannySetupContext("llama_generate_2", 0);
 
-  /* "llama_cy.pyx":22
- * def llama_generate_3(checkpoint: str = 'model.bin'):
+  /* "llama_cy.pyx":14
+ * def llama_generate_2(checkpoint: str = 'model.bin'):
  * 	# pass checkpoint name to our c code and get result
  * 	c_name = checkpoint.encode('utf-8')             # <<<<<<<<<<<<<<
  * 	cdef char* c_checkpoint = c_name
  * 	cdef char* generation_result = generate_2(c_checkpoint)
  */
-  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_encode, __pyx_v_checkpoint, __pyx_kp_s_utf_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_encode, __pyx_v_checkpoint, __pyx_kp_s_utf_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_c_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "llama_cy.pyx":23
+  /* "llama_cy.pyx":15
  * 	# pass checkpoint name to our c code and get result
  * 	c_name = checkpoint.encode('utf-8')
  * 	cdef char* c_checkpoint = c_name             # <<<<<<<<<<<<<<
  * 	cdef char* generation_result = generate_2(c_checkpoint)
  * 	result = generation_result.decode('unicode_escape')
  */
-  __pyx_t_2 = __Pyx_PyObject_AsWritableString(__pyx_v_c_name); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_AsWritableString(__pyx_v_c_name); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L1_error)
   __pyx_v_c_checkpoint = __pyx_t_2;
 
-  /* "llama_cy.pyx":24
+  /* "llama_cy.pyx":16
  * 	c_name = checkpoint.encode('utf-8')
  * 	cdef char* c_checkpoint = c_name
  * 	cdef char* generation_result = generate_2(c_checkpoint)             # <<<<<<<<<<<<<<
@@ -2535,30 +2445,30 @@ static PyObject *__pyx_pf_8llama_cy_4llama_generate_3(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_generation_result = generate_2(__pyx_v_c_checkpoint);
 
-  /* "llama_cy.pyx":25
+  /* "llama_cy.pyx":17
  * 	cdef char* c_checkpoint = c_name
  * 	cdef char* generation_result = generate_2(c_checkpoint)
  * 	result = generation_result.decode('unicode_escape')             # <<<<<<<<<<<<<<
  * 	print(result)
  */
-  __pyx_t_1 = __Pyx_decode_c_string(__pyx_v_generation_result, 0, strlen(__pyx_v_generation_result), NULL, NULL, PyUnicode_DecodeUnicodeEscape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_c_string(__pyx_v_generation_result, 0, strlen(__pyx_v_generation_result), NULL, NULL, PyUnicode_DecodeUnicodeEscape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "llama_cy.pyx":26
+  /* "llama_cy.pyx":18
  * 	cdef char* generation_result = generate_2(c_checkpoint)
  * 	result = generation_result.decode('unicode_escape')
  * 	print(result)             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_result); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_result); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "llama_cy.pyx":20
+  /* "llama_cy.pyx":12
  * 	generate_1(c_checkpoint)
  * 
- * def llama_generate_3(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
  * 	# pass checkpoint name to our c code and get result
  * 	c_name = checkpoint.encode('utf-8')
  */
@@ -2568,7 +2478,7 @@ static PyObject *__pyx_pf_8llama_cy_4llama_generate_3(CYTHON_UNUSED PyObject *__
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("llama_cy.llama_generate_3", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("llama_cy.llama_generate_2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_c_name);
@@ -2594,7 +2504,7 @@ static PyMethodDef __pyx_methods[] = {
 
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
-    {&__pyx_n_s__9, __pyx_k__9, sizeof(__pyx_k__9), 0, 0, 1, 1},
+    {&__pyx_n_s__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_c_checkpoint, __pyx_k_c_checkpoint, sizeof(__pyx_k_c_checkpoint), 0, 0, 1, 1},
     {&__pyx_n_s_c_name, __pyx_k_c_name, sizeof(__pyx_k_c_name), 0, 0, 1, 1},
@@ -2607,7 +2517,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_llama_cy_pyx, __pyx_k_llama_cy_pyx, sizeof(__pyx_k_llama_cy_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_llama_generate_1, __pyx_k_llama_generate_1, sizeof(__pyx_k_llama_generate_1), 0, 0, 1, 1},
     {&__pyx_n_s_llama_generate_2, __pyx_k_llama_generate_2, sizeof(__pyx_k_llama_generate_2), 0, 0, 1, 1},
-    {&__pyx_n_s_llama_generate_3, __pyx_k_llama_generate_3, sizeof(__pyx_k_llama_generate_3), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_kp_s_model_bin, __pyx_k_model_bin, sizeof(__pyx_k_model_bin), 0, 0, 1, 0},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
@@ -2622,7 +2531,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 18, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2633,47 +2542,35 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "llama_cy.pyx":8
- * 	char* generate_2(char* checkpoint)
+  /* "llama_cy.pyx":6
  * 
- * def llama_generate_1():             # <<<<<<<<<<<<<<
- * 	# https://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html
- * 	# simple call from python
- */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_s_checkpoint); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_llama_cy_pyx, __pyx_n_s_llama_generate_1, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 8, __pyx_L1_error)
-
-  /* "llama_cy.pyx":14
- * 	generate_1(checkpoint)
  * 
- * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * def llama_generate_1(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
  * 	# pass checkpoint name to our c code
  * 	c_name = checkpoint.encode('utf-8')
  */
-  __pyx_tuple__3 = PyTuple_Pack(3, __pyx_n_s_checkpoint, __pyx_n_s_c_name, __pyx_n_s_c_checkpoint); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_checkpoint, __pyx_n_s_c_name, __pyx_n_s_c_checkpoint); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_llama_cy_pyx, __pyx_n_s_llama_generate_1, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, ((PyObject*)__pyx_kp_s_model_bin)); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_llama_cy_pyx, __pyx_n_s_llama_generate_2, 14, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_tuple__5 = PyTuple_Pack(1, ((PyObject*)__pyx_kp_s_model_bin)); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "llama_cy.pyx":20
+  /* "llama_cy.pyx":12
  * 	generate_1(c_checkpoint)
  * 
- * def llama_generate_3(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
  * 	# pass checkpoint name to our c code and get result
  * 	c_name = checkpoint.encode('utf-8')
  */
-  __pyx_tuple__6 = PyTuple_Pack(5, __pyx_n_s_checkpoint, __pyx_n_s_c_name, __pyx_n_s_c_checkpoint, __pyx_n_s_generation_result, __pyx_n_s_result); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(5, __pyx_n_s_checkpoint, __pyx_n_s_c_name, __pyx_n_s_c_checkpoint, __pyx_n_s_generation_result, __pyx_n_s_result); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_llama_cy_pyx, __pyx_n_s_llama_generate_2, 12, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, ((PyObject*)__pyx_kp_s_model_bin)); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_llama_cy_pyx, __pyx_n_s_llama_generate_3, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_tuple__8 = PyTuple_Pack(1, ((PyObject*)__pyx_kp_s_model_bin)); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3042,58 +2939,46 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "llama_cy.pyx":8
- * 	char* generate_2(char* checkpoint)
+  /* "llama_cy.pyx":6
  * 
- * def llama_generate_1():             # <<<<<<<<<<<<<<
- * 	# https://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html
- * 	# simple call from python
- */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8llama_cy_1llama_generate_1, 0, __pyx_n_s_llama_generate_1, NULL, __pyx_n_s_llama_cy, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_llama_generate_1, __pyx_t_2) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "llama_cy.pyx":14
- * 	generate_1(checkpoint)
  * 
- * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * def llama_generate_1(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
  * 	# pass checkpoint name to our c code
  * 	c_name = checkpoint.encode('utf-8')
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_checkpoint, __pyx_n_s_str) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8llama_cy_3llama_generate_2, 0, __pyx_n_s_llama_generate_2, NULL, __pyx_n_s_llama_cy, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_checkpoint, __pyx_n_s_str) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8llama_cy_1llama_generate_1, 0, __pyx_n_s_llama_generate_1, NULL, __pyx_n_s_llama_cy, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__5);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_llama_generate_2, __pyx_t_3) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_llama_generate_1, __pyx_t_3) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "llama_cy.pyx":20
+  /* "llama_cy.pyx":12
  * 	generate_1(c_checkpoint)
  * 
- * def llama_generate_3(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
+ * def llama_generate_2(checkpoint: str = 'model.bin'):             # <<<<<<<<<<<<<<
  * 	# pass checkpoint name to our c code and get result
  * 	c_name = checkpoint.encode('utf-8')
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_checkpoint, __pyx_n_s_str) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8llama_cy_5llama_generate_3, 0, __pyx_n_s_llama_generate_3, NULL, __pyx_n_s_llama_cy, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_checkpoint, __pyx_n_s_str) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8llama_cy_3llama_generate_2, 0, __pyx_n_s_llama_generate_2, NULL, __pyx_n_s_llama_cy, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__8);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_llama_generate_3, __pyx_t_2) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_llama_generate_2, __pyx_t_2) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "llama_cy.pyx":1
- * from libc.stdlib cimport malloc             # <<<<<<<<<<<<<<
- * from libc.string cimport strcpy, strlen
- * 
+ * cdef extern from "llama_c.h":             # <<<<<<<<<<<<<<
+ * 	void generate_1(char* checkpoint)
+ * 	char* generate_2(char* checkpoint)
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -5498,7 +5383,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
                                                __pyx_n_s_name);
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
-        Py_XSETREF(name, __Pyx_NewRef(__pyx_n_s__9));
+        Py_XSETREF(name, __Pyx_NewRef(__pyx_n_s__7));
     }
     return name;
 }
