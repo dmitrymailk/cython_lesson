@@ -503,7 +503,7 @@ int argmax(float *v, int n)
 }
 // ----------------------------------------------------------------------------
 
-char *basic_generation_1(char *checkpoint)
+void basic_generation_1(char *checkpoint)
 {
 
     // poor man's C argparse
@@ -696,8 +696,218 @@ char *basic_generation_1(char *checkpoint)
         close(fd);
     return 0;
 }
+char *basic_generation_2(char *checkpoint)
+{
+
+    // poor man's C argparse
+    // char *checkpoint = NULL;  // e.g. out/model.bin
+    float temperature = 0.9f; // e.g. 1.0, or 0.0
+    int steps = 256;          // max number of steps to run for, 0: use seq_len
+    char *prompt = NULL;      // prompt string
+    char **generation_result = (char **)malloc(sizeof(char *) * steps);
+    // 'checkpoint' is necessary arg
+    if (!checkpoint)
+    {
+        printf("You should provide some checkpoint\n");
+        return 1;
+    }
+
+    // seed rng with time. if you want deterministic behavior use temperature 0.0
+    rng_seed = (unsigned int)time(NULL);
+
+    // read in the model.bin file
+    Config config;
+    TransformerWeights weights;
+    int fd = 0;         // file descriptor for memory mapping
+    float *data = NULL; // memory mapped data pointer
+    long file_size;     // size of the checkpoint file in bytes
+    {
+        FILE *file = fopen(checkpoint, "rb");
+        if (!file)
+        {
+            printf("Couldn't open file %s\n", checkpoint);
+            return 1;
+        }
+        // read in the config header
+        if (fread(&config, sizeof(Config), 1, file) != 1)
+        {
+            return 1;
+        }
+        // negative vocab size is hacky way of signaling unshared weights. bit yikes.
+        int shared_weights = config.vocab_size > 0 ? 1 : 0;
+        config.vocab_size = abs(config.vocab_size);
+        // figure out the file size
+        fseek(file, 0, SEEK_END); // move file pointer to end of file
+        file_size = ftell(file);  // get the file size, in bytes
+        fclose(file);
+        // memory map the Transformer weights into the data pointer
+        fd = open(checkpoint, O_RDONLY); // open in read only mode
+        if (fd == -1)
+        {
+            printf("open failed!\n");
+            return 1;
+        }
+        data = mmap(NULL, file_size, PROT_READ, MAP_PRIVATE, fd, 0);
+        if (data == MAP_FAILED)
+        {
+            printf("mmap failed!\n");
+            return 1;
+        }
+        float *weights_ptr = data + sizeof(Config) / sizeof(float);
+        checkpoint_init_weights(&weights, &config, weights_ptr, shared_weights);
+    }
+    // right now we cannot run for more than config.seq_len steps
+    if (steps <= 0 || steps > config.seq_len)
+    {
+        steps = config.seq_len;
+    }
+
+    // read in the tokenizer.bin file
+    char **vocab = (char **)malloc(config.vocab_size * sizeof(char *));
+    float *vocab_scores = (float *)malloc(config.vocab_size * sizeof(float));
+    unsigned int max_token_length;
+    {
+        FILE *file = fopen("tokenizer.bin", "rb");
+        if (!file)
+        {
+            printf("couldn't load tokenizer.bin\n");
+            return 1;
+        }
+        if (fread(&max_token_length, sizeof(int), 1, file) != 1)
+        {
+            printf("failed read\n");
+            return 1;
+        }
+        int len;
+        for (int i = 0; i < config.vocab_size; i++)
+        {
+            if (fread(vocab_scores + i, sizeof(float), 1, file) != 1)
+            {
+                printf("failed read\n");
+                return 1;
+            }
+            if (fread(&len, sizeof(int), 1, file) != 1)
+            {
+                printf("failed read\n");
+                return 1;
+            }
+            vocab[i] = (char *)malloc(len + 1);
+            if (fread(vocab[i], len, 1, file) != 1)
+            {
+                printf("failed read\n");
+                return 1;
+            }
+            vocab[i][len] = '\0'; // add the string terminating token
+        }
+        fclose(file);
+    }
+
+    // create and init the application RunState
+    RunState state;
+    malloc_run_state(&state, &config);
+
+    // process the prompt, if any
+    int *prompt_tokens = NULL;
+    int num_prompt_tokens = 0;
+    if (prompt != NULL)
+    {
+        prompt_tokens = (int *)malloc(config.seq_len * sizeof(int));
+        bpe_encode(prompt, vocab, vocab_scores, config.vocab_size, max_token_length, prompt_tokens, &num_prompt_tokens);
+    }
+
+    // start the main loop
+    long start = 0; // used to time our code, only initialized after first iteration
+    int next;       // will store the next token in the sequence
+    int token = 1;  // init with token 1 (=BOS), as done in Llama-2 sentencepiece tokenizer
+    int pos = 0;    // position in the sequence
+    // printf("<s>\n"); // explicit print the initial BOS token for stylistic symmetry reasons
+    while (pos < steps)
+    {
+
+        // forward the transformer to get logits for the next token
+        transformer(token, pos, &config, &state, &weights);
+
+        if (pos < num_prompt_tokens)
+        {
+            // if we are still processing the input prompt, force the next prompt token
+            next = prompt_tokens[pos];
+        }
+        else
+        {
+            // sample the next token
+            if (temperature == 0.0f)
+            {
+                // greedy argmax sampling: take the token with the highest probability
+                next = argmax(state.logits, config.vocab_size);
+            }
+            else
+            {
+                // apply the temperature to the logits
+                for (int q = 0; q < config.vocab_size; q++)
+                {
+                    state.logits[q] /= temperature;
+                }
+                // apply softmax to the logits to get the probabilities for next token
+                softmax(state.logits, config.vocab_size);
+                // we sample from this distribution to get the next token
+                next = sample(state.logits, config.vocab_size);
+            }
+        }
+
+        // following BOS token (1), sentencepiece decoder strips any leading whitespace (see PR #89)
+        char *token_str = (token == 1 && vocab[next][0] == ' ') ? vocab[next] + 1 : vocab[next];
+        // printf("pos = %d\n", pos);
+        generation_result[pos] = token_str;
+        // printf("%s", token_str);
+        // fflush(stdout);
+
+        // advance forward
+        token = next;
+        pos++;
+        // init our timer here because the first iteration is slow due to memmap
+        if (start == 0)
+        {
+            start = time_in_ms();
+        }
+    }
+
+    // report achieved tok/s
+    long end = time_in_ms();
+    // printf("\nachieved tok/s: %f\n", (steps - 1) / (double)(end - start) * 1000);
+
+    // printf("generation_resultn \n");
+    char *result = malloc(sizeof(char) * 3000);
+    for (int i = 0; i < steps; i++)
+    {
+        strcat(result, generation_result[i]);
+    }
+
+    // memory and file handles cleanup
+    free_run_state(&state);
+    for (int i = 0; i < config.vocab_size; i++)
+    {
+        free(vocab[i]);
+    }
+    free(vocab);
+    free(vocab_scores);
+    if (prompt_tokens != NULL)
+        free(prompt_tokens);
+    if (data != MAP_FAILED)
+        munmap(data, file_size);
+    if (fd != -1)
+        close(fd);
+
+    return result;
+}
 
 void generate_1(char *checkpoint)
 {
+    // simple wrapper to original code
     basic_generation_1(checkpoint);
+}
+
+char *generate_2(char *checkpoint)
+{
+    char *generation_result = (char *)basic_generation_2(checkpoint);
+    return generation_result;
 }
